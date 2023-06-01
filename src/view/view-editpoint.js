@@ -1,4 +1,4 @@
-import { humanizeDateTime } from '../util.js';
+import { humanizeDateTime } from '../util/util.js';
 import { cities } from '../mock/point.js';
 import { getOffers } from '../mock/offers.js';
 import { pointType } from '../mock/point.js';
