@@ -8,7 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     clean: true,
   },
-
   devtool: 'source-map',
   plugins: [
     new CopyPlugin({
