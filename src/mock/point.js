@@ -6,7 +6,8 @@ export const cities = [
   'Kazan',
   'Dubai',
   'London',
-
+  'Dubai',
+  'Kazan',
   'Los Angeles'
 ];
 
@@ -28,9 +29,9 @@ const textFish = () => {
     'Sed blandit, eros vel aliquam faucibus, purus ex euismod diam, eu luctus nunc ante ut dui.'
   ];
 
-  const randomIndex = getRandomInteger(0, text.length - 1);
+  const randomIndex = getRandomInteger(0, text .length - 1);
 
-  return text[randomIndex];
+  return text [randomIndex];
 };
 
 export const pointType = [
@@ -47,9 +48,9 @@ export const pointType = [
 
 const pointGenerate = () => {
 
-  const randomIndex = getRandomInteger(0, pointType .length - 1);
+  const randomIndex = getRandomInteger(0, pointType.length - 1);
 
-  return pointType [randomIndex];
+  return pointType[randomIndex];
 };
 const photoGenerate = () => {
   const photo = [];
