@@ -1,16 +1,17 @@
 import { render, replace } from '../framework/render.js';
 import PointsView from '../view/view-point.js';
-import ViewSort from '../view/view-sort.js';
-import ViewList from '../view/view-eventlist.js';
-import EditPointView from '../view/edit-pointview.js';
-import ViewEmp from '../view/view-list.js';
+import SortView from '../view/view-sort.js';
+import TripListView from '../view/view-eventlist.js';
+// import NewPointView from '../view/new-point-view.js';
+import EditPointView from '../view/view-editpoint.js';
+import EmptyView from '../view/view-listempty.js';
 
 export default class BoardPresenter {
   #boardContainer = null;
   #pointsModel = null;
   #boardPoints = [];
 
-  eventsList = new ViewList();
+  eventsList = new TripListView();
 
   constructor(boardContainer, pointsModel) {
     this.#boardContainer = boardContainer;
@@ -20,7 +21,7 @@ export default class BoardPresenter {
   init = () => {
     this.#boardPoints = this.#pointsModel.points;
 
-    render(new ViewSort(), this.#boardContainer);
+    render(new SortView(), this.#boardContainer);
     render(this.eventsList, this.#boardContainer);
     // render(new NewPointView(this.#boardPoints[1]), this.eventsList.element);
 
@@ -29,7 +30,7 @@ export default class BoardPresenter {
         this.#renderPoint(this.#boardPoints[i]);
       }
     } else {
-      render(new ViewEmp(), this.eventsList.element);
+      render(new EmptyView(), this.eventsList.element);
     }
   };
 
@@ -60,7 +61,6 @@ export default class BoardPresenter {
 
     editPointComponent.setEditClickHandler(() => {
       replaceEditFormToPoint();
-
     });
 
     editPointComponent.setFormSubmitHandler(() => {

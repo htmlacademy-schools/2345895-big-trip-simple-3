@@ -50,10 +50,10 @@ const offersTemplateContainer = (allOffers) => {
   );
 };
 
-const createPictureTemplate = (photo) => (`
-  <img class="event__photo" src="${photo.src}" alt="Event photo">
+const createPictureTemplate = (pictures) => (`
+  <img class="event__photo" src="${pictures.src}" alt="Event photo">
 `);
-const createphotoTemplate = (destination) => destination.photo.length ? destination.photo.map(createPictureTemplate).join('') : '';
+const createPicturesTemplate = (destination) => destination.pictures.length ? destination.pictures.map(createPictureTemplate).join('') : '';
 
 const createCityTemplate = (city) => (`
     <option value="${city}"></option>
@@ -83,7 +83,7 @@ const editPointTemplate = (point) => {
   const {basePrice, dateFrom, dateTo, destination, offers, type} = point;
   const allOffersByType = getAllOffersId(type, offers);
   const offersContainer = offersTemplateContainer(allOffersByType);
-  const photoTemplate = createphotoTemplate(destination);
+  const picturesTemplate = createPicturesTemplate(destination);
 
   return (`
 <li class="trip-events__item">
@@ -144,7 +144,7 @@ const editPointTemplate = (point) => {
       <p class="event__destination-description">${destination.description}</p>
       <div class="event__photos-container">
       <div class="event__photos-tape">
-        ${photoTemplate}
+        ${picturesTemplate}
       </div>
     </div>
     </section>

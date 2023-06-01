@@ -12,7 +12,7 @@ const BLANK_POINT = {
     id: null,
     description: null,
     name: null,
-    photo: null
+    pictures: null
   },
   id: null,
   offers: [],
@@ -79,10 +79,10 @@ const iconsTypesChecked = (typeInner) => {
   return iconsListMarking.join('');
 };
 
-const createPictureTemplate = (photo) => (`
-  <img class="event__photo" src="${photo.src}" alt="Event photo">
+const createPictureTemplate = (pictures) => (`
+  <img class="event__photo" src="${pictures.src}" alt="Event photo">
 `);
-const createphotoTemplate = (destination) => destination.photo.length ? destination.photo.map(createPictureTemplate).join('') : '';
+const createPicturesTemplate = (destination) => destination.pictures.length ? destination.pictures.map(createPictureTemplate).join('') : '';
 
 const createCityTemplate = (city) => (`
     <option value="${city}"></option>
@@ -94,7 +94,7 @@ const createNewPointTemplate = (point) => {
 
   const allOffersByType = getAllOffersId(type, offers);
   const offersContainer = offersTemplateContainer(allOffersByType);
-  const photoTemplate = destination.photo ? createphotoTemplate(destination) : '';
+  const picturesTemplate = destination.pictures ? createPicturesTemplate(destination) : '';
   const iconsTyped = iconsTypesChecked(type);
   const citiesTemplate = createCitiesTemplate(cities);
   const humanizedDateFrom = dateFrom ? humanizeDateTime(dateFrom) : '';
@@ -160,7 +160,7 @@ const createNewPointTemplate = (point) => {
 
       <div class="event__photos-container">
         <div class="event__photos-tape">
-          ${photoTemplate}
+          ${picturesTemplate}
         </div>
       </div>
     </section>
