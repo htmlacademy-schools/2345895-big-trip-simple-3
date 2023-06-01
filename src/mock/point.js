@@ -14,7 +14,7 @@ const generateCities = () => {
   return cities[randomIndex];
 };
 
-const generateDescription = () => {
+const descGener = () => {
 
   const descriptions = [
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
@@ -54,7 +54,7 @@ const generatePictures = () => {
   for (let i = 0; i < getRandomInteger(0, 10); i++) {
     pictures.push({
       src: `http://picsum.photos/300/200?r=0.076256300516331${getRandomInteger(0, 9)}`,
-      description: generateDescription()
+      description: descGener()
     });
   }
   return pictures;
@@ -62,7 +62,7 @@ const generatePictures = () => {
 
 const generateDestination = (idValue) => ({
   id: idValue,
-  description: generateDescription(),
+  description: descGener(),
   name: generateCities(),
   pictures: generatePictures()
 }
