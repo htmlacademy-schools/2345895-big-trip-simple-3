@@ -1,40 +1,48 @@
-import { render } from '../render.js';
-import viewPoint from '../view/view-point.js';
-import viewSort from '../view/view-sort.js';
-import viewList from '../view/view-eventlist.js';
-
-import viewEditPoint from '../view/edit-pointview.js';
-import viewNul from '../view/view-list.js';
+import { render, replace } from '../framework/render.js';
+import ViewPoints from '../view/view-point.js';
+import ViewSort from '../view/view-sort.js';
+import ViewList from '../view/view-eventlist.js';
+import ViewEditPoint from '../view/edit-pointview.js';
+import ViewEmpty from '../view/view-listempty.js';
 
 export default class BoardPresenter {
-  eventsList = new viewList();
+  #boardContainer = null;
+  #pointsModel = null;
+  #boardPoints = [];
 
-  init = (boardContainer, pointsModel) => {
-    this.boardContainer = boardContainer;
-    this.pointsModel = pointsModel;
-    this.boardPoints = this.pointsModel.points;
+  eventsList = new ViewList();
 
-    render(new viewSort(), this.boardContainer);
-    render(this.eventsList, this.boardContainer);
-    if (this.boardPoints.every((point) => point.isArchive)) {
-      render(new viewNul(), this.eventsList.element);
-    } else {
-      for (let i = 0; i < this.boardPoints.length; i++) {
-        this.#renderPoint(this.boardPoints[i]);
+  constructor(boardContainer, pointsModel) {
+    this.#boardContainer = boardContainer;
+    this.#pointsModel = pointsModel;
+  }
+
+  init = () => {
+    this.#boardPoints = this.#pointsModel.points;
+
+    render(new ViewSort(), this.#boardContainer);
+    render(this.eventsList, this.#boardContainer);
+    // render(new ViewNewPoint(this.#boardPoints[1]), this.eventsList.element);
+
+    if (this.#boardPoints.length > 0) {
+      for (let i = 0; i < this.#boardPoints.length; i++) {
+        this.#renderPoint(this.#boardPoints[i]);
       }
+    } else {
+      render(new ViewEmpty(), this.eventsList.element);
     }
   };
 
   #renderPoint = (point) => {
-    const pointComponent = new viewPoint(point);
-    const editPointComponent = new viewEditPoint(point);
+    const pointComponent = new ViewPoints(point);
+    const editPointComponent = new ViewEditPoint(point);
 
     const replaceEditFormToPoint = () => {
-      this.eventsList.element.replaceChild(pointComponent.element, editPointComponent.element);
+      replace(pointComponent, editPointComponent);
     };
 
     const replacePointToEditForm = () => {
-      this.eventsList.element.replaceChild(editPointComponent.element, pointComponent.element);
+      replace(editPointComponent, pointComponent);
     };
 
     const onEscKeyDown = (evt) => {
@@ -45,19 +53,18 @@ export default class BoardPresenter {
       }
     };
 
-    pointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    pointComponent.setPointClickHandler(() => {
       replacePointToEditForm();
       document.addEventListener('keydown', onEscKeyDown);
     });
 
-    editPointComponent.element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+    editPointComponent.setEditClickHandler(() => {
       replaceEditFormToPoint();
-      document.addEventListener('keydown', onEscKeyDown);
     });
 
-    editPointComponent.element.querySelector('form').addEventListener('submit', (evt) => {
-      evt.preventDefaul();
+    editPointComponent.setFormSubmitHandler(() => {
       replaceEditFormToPoint();
+      document.removeEventListener('keydown', onEscKeyDown);
     });
 
     render(pointComponent, this.eventsList.element);
