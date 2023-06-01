@@ -1,4 +1,4 @@
-import AbstractView from '../framework/view/abstract-view.js';
+import AbstractView from '../framework/view/abstract-view';
 import { humanizeDate, humanizeTime } from '../util.js';
 
 const createOfferTemplate = ({ title, price }) => (`
