@@ -6,4 +6,4 @@ const POINT_TYPES = [
   }
 ];
 
-export const gettypePoints = () => POINT_TYPES;
+export const getpointType s = () => POINT_TYPES;
