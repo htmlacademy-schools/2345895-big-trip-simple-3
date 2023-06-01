@@ -8,6 +8,7 @@ export default class ApiService {
    */
   constructor(endPoint, authorization) {
     this._endPoint = endPoint;
+
     this._authorization = authorization;
   }
 
