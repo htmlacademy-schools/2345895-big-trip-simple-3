@@ -55,11 +55,10 @@ export default class InteractionModelFilterView extends Presenter {
 
   onViewChange() {
     const value = this.view.getValue();
-    const predicate = Object.keys(FilterType).find((key) => FilterType[key] === value);
-    //Object.keys(FilterType).find((key) => FilterType[key] === predicate);
+    const predicate = FilterPredicate[Object.keys(FilterType).find((key) => FilterType[key] === value)];
+    //Object.keys(FilterType).find((key) => FilterType[key] === value);
     this.model.setMode(Mode.VIEW);
-    this.model.pointsModel.setFilter(this[predicate]);
-    //this.model.pointsModel.setFilter(this[predicate]);
+    this.model.pointsModel.setFilter(predicate);
   }
 
 

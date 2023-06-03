@@ -1,9 +1,9 @@
 import 'flatpickr/dist/flatpickr.min.css';
 
 
-import {UserCommand} from '../../enum/all-func';
+import { UserCommand } from '../../enum/all-func';
 import initCalendar from 'flatpickr';
-import View, {html} from './view.js';
+import View, { html } from './view.js';
 
 export default class ManagingDateSelectionForm extends View {
   #startDateCalendar;
@@ -12,8 +12,7 @@ export default class ManagingDateSelectionForm extends View {
   constructor() {
     super(...arguments);
 
-    // Запрещает очистку полей с датами с клавиатуры,
-    // подписка на обработчик должна происходить до инициализации flatpickr
+
     this.addEventListener('keydown', this.onKeydown.bind(this), true);
 
     /**

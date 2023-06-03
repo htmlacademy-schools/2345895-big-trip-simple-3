@@ -151,7 +151,7 @@ export default class InteractionApplicationModel extends Presenter {
 
   onPointTypeSelectViewChange() {
     const type = this.view.pointTypeSelectView.getValue();
-    const typeLabel = Object.keys(PointType).find((key) => PointType[key] === type);
+    const typeLabel = PointLabel[Object.keys(PointType).find((key) => PointType[key] === type)];
     //Object.keys(PointType).find((key) => PointType[key] === type);
     this.model.activePoint.type = type;
 

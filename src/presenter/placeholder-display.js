@@ -27,10 +27,8 @@ export default class PlaceholderDisplay extends Presenter {
 
   updateView() {
     const {length} = this.model.pointsModel.list();
-    //добавка value
-    const value = this.model.pointsModel.getFilter();
-    const key = Object.keys(FilterPredicate).find((k) => FilterPredicate[k] === value);
-    //Object.keys(FilterPredicate).find((key) => FilterPredicate[key] === value);
+    const key = Object.keys(FilterPredicate).find((k) => FilterPredicate[k] === this.model.pointsModel.getFilter());
+    //Object.keys(FilterPredicate).find((key) => FilterPredicate[key] === this.model.pointsModel.getFilter());
     const isHidden = Boolean(length) || this.model.getMode() === Mode.CREATE;
 
     this.view.textContent = isHidden ? '' : FilterPageEmpty[key];
