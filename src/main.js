@@ -1,7 +1,6 @@
 
 import {FilterPredicate} from './enum/all-func';
 import {SortCapSortCompare} from './enum/all-func';
-
 import Store from './store/store.js';
 
 import CollectionModel from './model/collection-model.js';
