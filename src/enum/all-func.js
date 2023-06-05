@@ -15,6 +15,7 @@ export const FilterLabel = {
   FUTURE: 'Future',
 };
 
+
 export const FilterPageEmpty = {
   EVERYTHING: 'Click "Create Event" to add your first point',
   FUTURE: 'There are no future events now',
